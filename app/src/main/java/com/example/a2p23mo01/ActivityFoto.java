@@ -11,11 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class ActivityFoto extends AppCompatActivity {
 
     static final int peticion_captura_imagen = 101;
-    static final int Peticion_captura_camara = 102;
+    static final int peticion_acceso_camara = 102;
 
     ImageView Objetoimagen;
     Button btntomarfoto;
@@ -47,5 +48,19 @@ public class ActivityFoto extends AppCompatActivity {
         }
     }
 
-    public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull)
+    public void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            TomarFoto();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Se necesita el permiso para acceder a la camara", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void TomarFoto() {
+    }
+
+
 }
